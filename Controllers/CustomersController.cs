@@ -8,65 +8,66 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BaiThucHanh1402.Models;
 
+
 namespace BaiThucHanh1402.Controllers
 {
-    public class StudentsController : Controller
+    public class CustomersController : Controller
     {
         private readonly ApplicationDBContext _context;
-         AutoGeneratekey Aukey = new AutoGeneratekey();
+           AutoGeneratekey Aukey = new AutoGeneratekey();
 
-        public StudentsController(ApplicationDBContext context)
+        public CustomersController(ApplicationDBContext context)
         {
             _context = context;
         }
 
-        // GET: Students
+        // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Student.ToListAsync());
+            return View(await _context.Customer.ToListAsync());
         }
 
-        // GET: Students/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Customers/Details/5
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var student = await _context.Student
-                .FirstOrDefaultAsync(m => m.StudentID == id);
-            if (student == null)
+            var customer = await _context.Customer
+                .FirstOrDefaultAsync(m => m.PersonID == id);
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(customer);
         }
 
-        // GET: Students/Create
+        // GET: Customers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
+        // POST: Customers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentID,StudentName,Address")] Student student)
+        public async Task<IActionResult> Create([Bind("Email,Gender,Brithday,PersonID,PersonName,Address")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(student);
+                _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(customer);
         }
 
-        // GET: Students/Edit/5
+        // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +75,22 @@ namespace BaiThucHanh1402.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student.FindAsync(id);
-            if (student == null)
+            var customer = await _context.Customer.FindAsync(id);
+            if (customer == null)
             {
                 return NotFound();
             }
-            return View(student);
+            return View(customer);
         }
 
-        // POST: Students/Edit/5
+        // POST: Customers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudentID,StudentName,Address")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("Email,Gender,Brithday,PersonID,PersonName,Address")] Customer customer)
         {
-            if (id != student.StudentID)
+            if (id != customer.PersonID)
             {
                 return NotFound();
             }
@@ -98,12 +99,12 @@ namespace BaiThucHanh1402.Controllers
             {
                 try
                 {
-                    _context.Update(student);
+                    _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.StudentID))
+                    if (!CustomerExists(customer.PersonID))
                     {
                         return NotFound();
                     }
@@ -114,41 +115,41 @@ namespace BaiThucHanh1402.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(customer);
         }
 
-        // GET: Students/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Customers/Delete/5
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var student = await _context.Student
-                .FirstOrDefaultAsync(m => m.StudentID == id);
-            if (student == null)
+            var customer = await _context.Customer
+                .FirstOrDefaultAsync(m => m.PersonID == id);
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(customer);
         }
 
-        // POST: Students/Delete/5
+        // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Student.FindAsync(id);
-            _context.Student.Remove(student);
+            var customer = await _context.Customer.FindAsync(id);
+            _context.Customer.Remove(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
+        private bool CustomerExists(int id)
         {
-            return _context.Student.Any(e => e.StudentID == id);
+            return _context.Customer.Any(e => e.PersonID == id);
         }
     }
 }

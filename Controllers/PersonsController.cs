@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BaiThucHanh1402.Models;
 
+
 namespace BaiThucHanh1402.Controllers
 {
     public class PersonsController : Controller
     {
         private readonly ApplicationDBContext _context;
+         AutoGeneratekey Aukey = new AutoGeneratekey();
 
         public PersonsController(ApplicationDBContext context)
         {
@@ -26,7 +28,7 @@ namespace BaiThucHanh1402.Controllers
         }
 
         // GET: Persons/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {

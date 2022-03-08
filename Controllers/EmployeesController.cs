@@ -13,6 +13,7 @@ namespace BaiThucHanh1402.Controllers
     public class EmployeesController : Controller
     {
         private readonly ApplicationDBContext _context;
+         AutoGeneratekey Aukey = new AutoGeneratekey();
 
         public EmployeesController(ApplicationDBContext context)
         {

@@ -1,10 +1,10 @@
 @model BaiThucHanh1402.Models.Person
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Xóa";
 }
 
-<h1>Delete</h1>
+<h1>Xóa</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -28,6 +28,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="PersonID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">trở lại trang</a>
     </form>
 </div>
