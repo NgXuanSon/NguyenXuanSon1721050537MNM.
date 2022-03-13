@@ -13,6 +13,7 @@ namespace BaiThucHanh1402.Controllers
     public class StudentsController : Controller
     {
         private readonly ApplicationDBContext _context;
+         XuLyChuoi Xulychuoi = new XuLyChuoi();
          AutoGeneratekey Aukey = new AutoGeneratekey();
 
         public StudentsController(ApplicationDBContext context)
