@@ -6,7 +6,7 @@ namespace BaiThucHanh1402.Models
     {
         [Key]
         [Display(Name ="Mã nhân viên")]
-        public int EmployeeID { get; set; }
+        public string EmployeeID { get; set; }
         [Display(Name ="Tên nhân viên")]
         [MaxLength(40)]
         [MinLength(10)]

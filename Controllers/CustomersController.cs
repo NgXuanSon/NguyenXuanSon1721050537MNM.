@@ -14,6 +14,7 @@ namespace BaiThucHanh1402.Controllers
     public class CustomersController : Controller
     {
         private readonly ApplicationDBContext _context;
+           XuLyChuoi XuLyChuoi = new XuLyChuoi();
            AutoGeneratekey Aukey = new AutoGeneratekey();
 
         public CustomersController(ApplicationDBContext context)
@@ -28,7 +29,7 @@ namespace BaiThucHanh1402.Controllers
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
@@ -68,7 +69,7 @@ namespace BaiThucHanh1402.Controllers
         }
 
         // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -88,7 +89,7 @@ namespace BaiThucHanh1402.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Email,Gender,Brithday,PersonID,PersonName,Address")] Customer customer)
+        public async Task<IActionResult> Edit(string id, [Bind("Email,Gender,Brithday,PersonID,PersonName,Address")] Customer customer)
         {
             if (id != customer.PersonID)
             {
@@ -119,7 +120,7 @@ namespace BaiThucHanh1402.Controllers
         }
 
         // GET: Customers/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -147,7 +148,7 @@ namespace BaiThucHanh1402.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerExists(int id)
+        private bool CustomerExists(string id)
         {
             return _context.Customer.Any(e => e.PersonID == id);
         }
